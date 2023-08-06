@@ -60,12 +60,10 @@ pipeline{
                }
             }
         }
-        stage('Maven Build : maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   mvnBuild()
+          stage('Build') {
+            steps {
+                dir("/var/lib/jenkins/workspace/mrdevops_java_app/my-app") {
+                sh 'mvn -B -DskipTests clean package'
                }
             }
         }
