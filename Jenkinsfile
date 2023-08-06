@@ -62,7 +62,7 @@ pipeline{
         }
           stage('Build') {
             steps {
-                dir("/var/lib/jenkins/workspace/mrdevops_java_app/my-app") {
+                dir("/var/lib/jenkins/workspace/mrdevops_java_app/abdul") {
                 sh 'mvn -B -DskipTests clean package'
                }
             }
