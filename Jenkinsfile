@@ -64,7 +64,7 @@ pipeline{
             when { expression {  params.action == 'create' } }
          git url: 'https://github.com/Abdulsalam16/abdul_webapp.git'
          withMaven {
-           steps{
+           {
               script{
 
                mvnBuild()
