@@ -60,14 +60,16 @@ pipeline{
                }
             }
         }
-        stage('Build'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   mvnBuild()
+         stage ('Build') {
+            when { expression {  params.action == 'create' } }
+         git url: 'https://github.com/Abdulsalam16/abdul_webapp.git'
+         withMaven {
+           steps{
+              script{}
+
+               mvnBuild()
                }
             }
         }
-    }
+}
 }
