@@ -2,7 +2,7 @@
 
 pipeline{
 
-    agent any 
+    agent any
 
     parameters{
 
@@ -10,43 +10,44 @@ pipeline{
     }
 
     stages{
-
-        
+         
         stage('Git Checkout'){
-                    when { expression { params.action == 'create'} }
+                    when { expression {  params.action == 'create' } }
             steps{
             gitCheckout(
                 branch: "main",
-                url: "https://github.com/Abdulsalam16/abdul_webapp.git"
+                url: "https://github.com/vikash-kumar01/mrdevops_java_app.git"
             )
             }
         }
-        stage('Unit Test maven'){
-        when { expression { params.action == 'create'} }
+         stage('Unit Test maven'){
+         
+         when { expression {  params.action == 'create' } }
 
             steps{
                script{
-
+                   
                    mvnTest()
                }
             }
         }
          stage('Integration Test maven'){
-         when { expression { params.action == 'create'} }
+         when { expression {  params.action == 'create' } }
             steps{
-                script{
-
-                    mvnIntegrationTest()
-                }
+               script{
+                   
+                   mvnIntegrationTest()
+               }
             }
-         }
-         stage('Static code analysis: Sonarqube'){
-         when { expression { params.action == 'create'} }
+        }
+        stage('Static code analysis: Sonarqube'){
+         when { expression {  params.action == 'create' } }
             steps{
-                script{
-                    def SonarQubecredentialsId = 'sonarqube-api'
-                    statiCodeAnalysis(SonarQubecredentialsId)
-                }
+               script{
+                   
+                   def SonarQubecredentialsId = 'sonarqube-api'
+                   statiCodeAnalysis(SonarQubecredentialsId)
+               }
             }
         }
         stage('Quality Gate Status Check : Sonarqube'){
@@ -57,16 +58,16 @@ pipeline{
                    def SonarQubecredentialsId = 'sonarqube-api'
                    QualityGateStatus(SonarQubecredentialsId)
                }
-           }
-       }
-    }
-       stage('Maven Build : maven'){
+            }
+        }
+        stage('Maven Build : maven'){
          when { expression {  params.action == 'create' } }
             steps{
                script{
                    
                    mvnBuild()
                }
-       }
+            }
+        }
     }
 }
