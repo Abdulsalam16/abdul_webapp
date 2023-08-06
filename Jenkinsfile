@@ -65,11 +65,12 @@ pipeline{
          git url: 'https://github.com/Abdulsalam16/abdul_webapp.git'
          withMaven {
            steps{
-              script{}
+              script{
 
                mvnBuild()
                }
             }
         }
-}
+     }
+  }
 }
