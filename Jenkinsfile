@@ -21,7 +21,6 @@ pipeline{
             }
         }
          stage('Unit Test maven'){
-         
          when { expression {  params.action == 'create' } }
 
             steps{
@@ -60,17 +59,13 @@ pipeline{
                }
             }
         }
-         stage ('Build') {
-            when { expression {  params.action == 'create' } }
-         git url: 'https://github.com/Abdulsalam16/abdul_webapp.git'
-         withMaven {
-           {
-              script{
-
-               mvnBuild()
+         stage('Maven Build'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{                  
+                   mvnBuild()
                }
             }
         }
-     }
-  }
+}
 }
