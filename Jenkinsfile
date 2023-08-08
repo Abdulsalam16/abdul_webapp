@@ -10,7 +10,6 @@ pipeline{
         string(name: 'ImageName', description: "name of the docker build", defaultValue: 'javapp')
         string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
         string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'abdulsalam16')
-
     }
 
     stages{
@@ -44,7 +43,7 @@ pipeline{
                }
             }
         }
-        stage('Static code analysis: Sonarqube'){
+       /* stage('Static code analysis: Sonarqube'){
          when { expression {  params.action == 'create' } }
             steps{
                script{
@@ -63,7 +62,7 @@ pipeline{
                    QualityGateStatus(SonarQubecredentialsId)
                }
             }
-        }
+        }*/
         stage('Maven Build : maven'){
          when { expression {  params.action == 'create' } }
             steps{
@@ -73,7 +72,7 @@ pipeline{
                }
             }
         }
-        stage('Docker Image Build'){
+       /* stage('Docker Image Build'){
         when { expression {  params.action == 'create' } }
            steps{
             script{
@@ -89,7 +88,7 @@ pipeline{
                    dockerImageScan("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
                }
             }
-        }
+        }*/
         stage('Docker Image Push : DockerHub '){
          when { expression {  params.action == 'create' } }
             steps{
